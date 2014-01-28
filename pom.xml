@@ -1,0 +1,22 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.mule</groupId>
+    <artifactId>mule-user-manual-examples-parent</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <name>Mule User Manual Examples</name>
+
+	<!--
+	
+	 	This module does not provide properties to the submodules and the submodules don't declare this pom as parent
+		because each of the submodules have to be able to be distributed standalone 
+	
+		Update of versions in the submodules is, at the moment, a manual task.
+		
+	-->
+
+    <modules>
+        <module>message-sources</module>
+    </modules>
+
+</project>

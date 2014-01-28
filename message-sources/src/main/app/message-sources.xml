@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.4.1"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd">
+
+<!-- START SNIPPET: flowWithPoll -->
+<flow name="flowWithPoll" doc:name="flowWithPoll">
+	<poll frequency="2000" doc:name="Poll">
+    	<http:outbound-endpoint exchange-pattern="request-response" host="www.google.com"  method="GET" port="80" doc:name="HTTP"/>
+    </poll>
+    <object-to-string-transformer doc:name="Object to String"/>
+    <logger message="#[message.payload]" level="INFO" doc:name="Logger"/>
+</flow>
+<!-- END SNIPPET: flowWithPoll -->
+
+<!-- START SNIPPET: useMyCustomSource -->    
+<flow name="useMyCustomSource" doc:name="useMyCustomSource">
+	<custom-source class="org.my.CustomClass">
+		<spring:property name="threads" value="500"/>
+	</custom-source>
+	<vm:outbound-endpoint path="output" exchange-pattern="one-way"/>
+</flow>
+<!-- END SNIPPET: useMyCustomSource -->
+	
+</mule>
